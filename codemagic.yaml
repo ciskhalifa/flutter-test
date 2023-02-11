@@ -1,8 +1,7 @@
 workflows:
   my-workflow:
     scripts:
-      - name: Build Android App Bundle
-        working_directory: android
-        script: ./gradlew bundleRelease
-    artifacts:
-      - build/**/outputs/bundle/**/*.aab
+    - name: Emulator tests
+      script: | 
+        flutter emulators --launch apple_ios_simulator
+        flutter -d iPhone test integration_test
