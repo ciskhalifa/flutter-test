@@ -1,12 +1,8 @@
 workflows:
   my-workflow:
     scripts:
-      - name: Run iOS tests
-        script: |
-          set -e # exit on first failed command
-
-          xcode-project run-tests \
-              --workspace ${XCODE_WORKSPACE?} \
-              --scheme ${XCODE_SCHEME?} \
-              --device "iPhone 12"
-        test_report: build/ios/test/*.xml
+      - name: Build Android App Bundle
+        working_directory: android
+        script: ./gradlew bundleRelease
+    artifacts:
+      - build/**/outputs/bundle/**/*.aab
